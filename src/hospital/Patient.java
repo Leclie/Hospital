@@ -15,27 +15,30 @@ public class Patient
         System.out.println("Для выхода введите exit");
         String answer;
         
-        do
-        {
             Scanner in = new Scanner(System.in);
             answer = in.nextLine();
             
-            if("new".equals(answer))
+            do
             {
-                Patient.registration(p);
-            }
-            else
-            {
-                for(int i = 0; i < p.length; ++i)
+                if("new".equals(answer))
                 {
-                    if(p[i].code.equals(answer))
-                    {
-                        p[i].welcome();
-                        break;
-                    }
+                    Patient.registration(p);
                 }
-            }
-        }while(!"exit".equals(answer));
+                else
+                {
+                    boolean find = false;
+                    for(int i = 0; i < p.length; ++i)
+                    {
+                        if(p[i] != null && p[i].code.equals(answer))
+                        {
+                            p[i].welcome();
+                            find = true;
+                        }    
+                    
+                    }
+                    if(!find){System.out.println("Мы ничего не нашли");}
+                }
+            }while(!"exit".equals(answer));
     }
     
     static void registration(Patient[] p)
@@ -45,7 +48,7 @@ public class Patient
         {
             ++i;
         }
-        
+        p[i] = new Patient();
         System.out.println("Регистрация");
         System.out.println("Введите своё имя");
         Scanner in = new Scanner(System.in);
@@ -58,7 +61,7 @@ public class Patient
     
     void welcome()
     {
-        
+        System.out.println("Добро пожаловать" + this.name);
     }
     
 }
