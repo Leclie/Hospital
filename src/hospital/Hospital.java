@@ -4,16 +4,18 @@ import java.util.Scanner;
 
 public class Hospital
 {
-    Administrator admin;
-    Doctor doc;
+    Doctor lor;
+    Doctor hirurg;
+    Doctor terapevt;
     MainDoctor mainDoc;
     Patient[] p;
     
-    void open()
+    void open(Hospital hos)
     {
         this.mainDoc = new MainDoctor();
-        this.doc = new Doctor();
-        this.admin = new Administrator();
+        this.lor = new Doctor("Sasha","sasha742");
+        this.hirurg = new Doctor("Artem","artem742");
+        this.terapevt = new Doctor("Ilya","ilya742");
         this.p = new Patient[15];
         
         String answer;
@@ -26,16 +28,16 @@ public class Hospital
             System.out.println("Ваш ответ:");
             
             Scanner in = new Scanner(System.in);
-            answer= in.nextLine();
+            answer = in.nextLine();
         
             switch(answer)
             {
                 case "main doctor":
-                    mainDoc.work(); break;
+                    mainDoc.work(lor, hirurg, terapevt); break;
                 case "doctor":
-                    doc.work(); break;
+                    Doctor.work(lor, hirurg, terapevt); break;
                 case "patient":
-                    Patient.work(p); break;
+                    Patient.work(p, hos); break;
                 default:
                     answer = "exit"; break;
             }
