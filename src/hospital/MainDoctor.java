@@ -22,9 +22,9 @@ public class MainDoctor
                     case "Sasha": lor.out(); break;
                     case "Artem": hirurg.out(); break;
                     case "Ilya": terapevt.out(); break;
-                    case "all": lor.out(); hirurg.out(); terapevt.out();
+                    case "all": lor.out(); hirurg.out(); terapevt.out(); break;
                     default:
-                        System.out.println("Вы ввели неправильно");
+                        System.out.println("Вы ввели неправильно"); break;
                 }
             }while(!"exit".equals(answer));
     }

@@ -32,9 +32,9 @@ public class Administrator
                System.out.println("У вас уже есть запись к этому врачу");
                return;
            }
+           ++i;
        }
        String answer;
-       boolean a = false;
        do
        {
            
@@ -42,44 +42,42 @@ public class Administrator
            Scanner in = new Scanner(System.in); 
            answer = in.nextLine();
            i = 0;
-           while(doc.note[i] != null)
+           while(doc.note[i] != null && !"exit".equals(answer))
            {
-             if(answer.startsWith(doc.note[i].substring(0, 8)))
+               System.out.println("Проверка записей");
+               if(answer.startsWith(doc.note[i].substring(0, 8)))
              { if(Integer.parseInt(doc.note[i].substring(9, 11)) - Integer.parseInt(answer.substring(9, 11)) == 1)
                {
                    if(Integer.parseInt(answer.substring(12)) > 30)
                    {
-                       System.out.println("Это время занято");
+                       System.out.println("Это время занято 1");
                    }
                    else
                    {
                        input(answer, doc, p);
-                       a = true;
                    }
                }
                else if(Integer.parseInt(doc.note[i].substring(9, 11)) == Integer.parseInt(answer.substring(9, 11)))
                {
                    if(Integer.parseInt(answer.substring(12)) < 30 )
                    {
-                       System.out.println("Это время занято");
+                       System.out.println("Это время занято 2");
                    }
                    else
                    {
                        input(answer, doc, p);
-                       a = true;
                    }
                }
                else
                {
                        input(answer, doc, p);
-                       a = true;
                }
              }
-             else{input(answer, doc, p); a = true;}
+             else{input(answer, doc, p);}
              ++i;
            }
-           
-       }while(a == false);
+           if(doc.note[0] == null && !"exit".equals(answer)) {input(answer, doc, p);}
+       }while(!"exit".equals(answer));
    }
    
    public static void input(String answer, Doctor doc, Patient p)
@@ -90,6 +88,6 @@ public class Administrator
        {
            ++i;
        }
-       doc.note[i] = answer + p.name;
+       doc.note[i] = answer + " " + p.name;
    }
 }
