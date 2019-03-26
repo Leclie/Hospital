@@ -39,44 +39,42 @@ public class Administrator
        {
            
            System.out.println("Введите дату в формате ГГ.ММ.ДД ЧЧ:ММ");
-           Scanner in = new Scanner(System.in); 
-           answer = in.nextLine();
+           Scanner in3 = new Scanner(System.in); 
+           answer = in3.nextLine();
+           boolean spasenie = false;
            i = 0;
+           System.out.println("Проверка записей");
            while(doc.note[i] != null && !"exit".equals(answer))
            {
-               System.out.println("Проверка записей");
                if(answer.startsWith(doc.note[i].substring(0, 8)))
-             { if(Integer.parseInt(doc.note[i].substring(9, 11)) - Integer.parseInt(answer.substring(9, 11)) == 1)
+             { if(Math.abs(Integer.parseInt(doc.note[i].substring(9, 11)) - Integer.parseInt(answer.substring(9, 11))) == 1)
                {
-                   if(Integer.parseInt(answer.substring(12)) > 30)
+                   if(Math.abs(Integer.parseInt(answer.substring(12)) - Integer.parseInt(doc.note[i].substring(12, 14))) >= 30)
                    {
-                       System.out.println("Это время занято 1");
-                   }
-                   else
-                   {
-                       input(answer, doc, p);
+                       spasenie = true;
                    }
                }
                else if(Integer.parseInt(doc.note[i].substring(9, 11)) == Integer.parseInt(answer.substring(9, 11)))
                {
-                   if(Integer.parseInt(answer.substring(12)) < 30 )
+                   if(Math.abs(Integer.parseInt(answer.substring(12)) - Integer.parseInt(doc.note[i].substring(12, 14))) <= 30 )
                    {
-                       System.out.println("Это время занято 2");
+                       spasenie = true;
                    }
-                   else
-                   {
-                       input(answer, doc, p);
-                   }
-               }
-               else
-               {
-                       input(answer, doc, p);
                }
              }
-             else{input(answer, doc, p);}
              ++i;
            }
-           if(doc.note[0] == null && !"exit".equals(answer)) {input(answer, doc, p);}
+           if(doc.note[0] == null && !"exit".equals(answer)) {System.out.println("Это время свободно"); input(answer, doc, p); return;}
+           if(!spasenie)
+           {
+               System.out.println("Это время свободно");
+               input(answer, doc, p); 
+               return;
+           }
+           else
+           {
+               System.out.println("Это время занято");
+           }
        }while(!"exit".equals(answer));
    }
    
