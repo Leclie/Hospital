@@ -38,6 +38,7 @@ public class Doctor
     public void out()
     {
         int i = 0;
+        System.out.println(this.name + ":");
         if(note[i] == null)
         {
             System.out.println("Нет записей");
