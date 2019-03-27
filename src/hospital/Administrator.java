@@ -41,6 +41,14 @@ public class Administrator
            System.out.println("Введите дату в формате ГГ.ММ.ДД ЧЧ:ММ");
            Scanner in3 = new Scanner(System.in); 
            answer = in3.nextLine();
+           
+           if(Integer.parseInt(answer.substring(9, 11)) > 20 || Integer.parseInt(answer.substring(9, 11)) < 8)
+           {
+               System.out.println("В это время больница закрыта!");
+               return;
+           }
+           
+           
            boolean spasenie = false;
            i = 0;
            System.out.println("Проверка записей");
@@ -49,14 +57,14 @@ public class Administrator
                if(answer.startsWith(doc.note[i].substring(0, 8)))
              { if(Math.abs(Integer.parseInt(doc.note[i].substring(9, 11)) - Integer.parseInt(answer.substring(9, 11))) == 1)
                {
-                   if(Math.abs(Integer.parseInt(answer.substring(12)) - Integer.parseInt(doc.note[i].substring(12, 14))) >= 30)
+                   if(Math.abs(Integer.parseInt(answer.substring(12)) - Integer.parseInt(doc.note[i].substring(12, 14))) > 30)
                    {
                        spasenie = true;
                    }
                }
                else if(Integer.parseInt(doc.note[i].substring(9, 11)) == Integer.parseInt(answer.substring(9, 11)))
                {
-                   if(Math.abs(Integer.parseInt(answer.substring(12)) - Integer.parseInt(doc.note[i].substring(12, 14))) <= 30 )
+                   if(Math.abs(Integer.parseInt(answer.substring(12)) - Integer.parseInt(doc.note[i].substring(12, 14))) < 30 )
                    {
                        spasenie = true;
                    }
